@@ -3,10 +3,10 @@ import java.util.Arrays;
 /**
  * This file contains a few exercises to familiarize you with specific
  * class features in Java.
- *
+
  * You should read this file from top-to-bottom. Any tasks you are to complete
  * are labelled with TODO
- *
+
  * For your convenience, we have also included references to the
  * relevant readings for each task.
  */
@@ -16,11 +16,11 @@ public class Silly implements Comparable<Silly>{
      * 1. Java has variables known as "static" variables.
      * These are variables that exist in every instance of a class,
      * and which have the same value across all instances.
-     *
+
      * Below we have created a static variable (signified by the keyword
      * static) named my_static. The countStatic() method makes use of this
      * static variable.
-     *
+
      * (Relevant reading: 2.1. Static variables)
      */
     public static int my_static = 0;
@@ -45,10 +45,8 @@ public class Silly implements Comparable<Silly>{
      * 2. Java allows for us to overload methods: this means we can have
      *    multiple methods of the same name, but which take different
      *    parameters (both in terms of numbers and type).
-     *
      *    Below we have created two different constructors and have left
      *    a third for you to write.
-     *
      *    (Relevant reading: 2.2. Overloading)
      */
 
@@ -80,18 +78,24 @@ public class Silly implements Comparable<Silly>{
      *       Make sure you document this method!
      */
 
-
-
+    /**
+     * Creates a new Silly object.
+     * This constructor takes in two strings as arguments.
+     *
+     * @param string1 to be concatenated with string2 as the Silly instance's name.
+     * @param string2 to be concatenated with string1 as the Silly instance's name.
+     */
+    public Silly(String string1, String string2) {
+        this.name = string1 + string2;
+    }
 
 
     public static void main(String[] args) {
         /**
          * Task 1 (continued): The below demonstrates how each of the Silly
          *                     constructors are called.
-         *
          * This is simply provided as an example for you to see whether your
          * code is working correctly, and to see how the different calls appear
-         *
          * To run this, Task 3 is also required to be completed.
          */
         Silly first_version = new Silly("single str name");
@@ -116,7 +120,7 @@ public class Silly implements Comparable<Silly>{
         y.countStatic();
         x.countStatic();
         x.countStatic();
-        int[] expected_values = {};
+        int[] expected_values = {0, 1, 2, 3};
 
         System.out.println("The countStatic calls will return " + Arrays.toString(expected_values));
     }
@@ -133,9 +137,9 @@ public class Silly implements Comparable<Silly>{
      */
     @Override
     public String toString(){
-        // TODO (Task 3): Implement the body of this method!
-    }
-
+       return this.name;
+     }
+    // TODO (Task 3): Implement the body of this method!
     /**
      * 4. We can also override the equals() method, which is the equivalent of
      *    Python's __eq__; however, unlike Python, this is called when we use
@@ -153,12 +157,15 @@ public class Silly implements Comparable<Silly>{
          *                We've started it by checking the type of o for you.
          *                You just need to return true if the names are equal.
          */
+
         if (!(o instanceof Silly)){
             return false;
         }
 
+
         Silly other = (Silly) o; // To access .name of o, we need to cast it.
 
+        return other.name.equals(this.name);
         // Hint: to compare strings, we need to use .equals()
         //       e.g. s1.equals(s2)
     }
@@ -194,6 +201,13 @@ public class Silly implements Comparable<Silly>{
          *                You can get the length of a string by using the
          *                .length() method.
          */
+    if (other.name.length() == this.name.length()){
+        return 0;
+    }
+    if (other.name.length() > this.name.length()){
+        return -1;
+    }
+        return 1;
     }
 
     /*
